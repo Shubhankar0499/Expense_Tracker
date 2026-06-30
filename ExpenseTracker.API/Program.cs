@@ -50,5 +50,15 @@ app.UseHttpsRedirection();
 
 app.MapControllers();
 
+app.MapGet("/health", () =>
+{
+    return new
+    {
+        Status = "Healthy",
+        Application = "ExpenseTracker",
+        Time = DateTime.UtcNow
+    };
+});
+
 
 app.Run();
