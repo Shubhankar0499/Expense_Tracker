@@ -27,6 +27,12 @@ builder.Services.AddDbContext<ExpenseDbContext>(options =>
     );
 });
 
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration =
+        builder.Configuration.GetConnectionString("Redis");
+});
+
 
 
 builder.Services.AddEndpointsApiExplorer();
