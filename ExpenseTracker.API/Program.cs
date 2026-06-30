@@ -27,6 +27,12 @@ builder.Services.AddDbContext<ExpenseDbContext>(options =>
     );
 });
 
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration =
+        builder.Configuration.GetConnectionString("Redis");
+});
+
 
 
 builder.Services.AddEndpointsApiExplorer();
@@ -49,6 +55,16 @@ app.UseHttpsRedirection();
 
 
 app.MapControllers();
+
+app.MapGet("/health", () =>
+{
+    return new
+    {
+        Status = "Healthy",
+        Application = "ExpenseTracker",
+        Time = DateTime.UtcNow
+    };
+});
 
 
 app.Run();

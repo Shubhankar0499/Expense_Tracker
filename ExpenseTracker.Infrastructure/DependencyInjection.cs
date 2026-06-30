@@ -1,4 +1,5 @@
 ﻿using ExpenseTracker.Application.Interfaces;
+using ExpenseTracker.Infrastructure.Cache;
 using ExpenseTracker.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,6 +14,7 @@ public static class DependencyInjection
     {
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IExpenseRepository, ExpenseRepository>();
+        services.AddScoped<RedisCacheService>();
 
         return services;
     }
